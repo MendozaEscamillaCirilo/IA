@@ -27,11 +27,51 @@ string deEnteroaCadena(int numero,string dato){
  return dato;
 }
 
+int deCadenaaEntero(int numero,string dato){
+ numero = 0;
+ if(dato[0] == 49){ numero += 32;}
+ if(dato[1] == 49){ numero += 16;}
+ if(dato[2] == 49){ numero += 8;}
+ if(dato[3] == 49){ numero += 4;}
+ if(dato[4] == 49){ numero += 2;}
+ if(dato[5] == 49){ numero += 1;}
+ return numero;
+}
+
+string creahijo(string p1,string p2,string h1){
+ for(int i=0;i<6;i++){
+       if(i<3){
+            h1[i] = p1[i];   
+       }else{
+            h1[i] = p2[i];   
+       }
+ }
+ return h1;
+}
+int* conbinarycrearhijos(int* padres,int* hijos,int n){
+    for(int i = 0;i < n;i++){
+        int p1 = rand() % (n+1);
+        int p2 = rand() % (n+1);
+        string ps1 = deEnteroaCadena(padres[p1],ps1);
+        string ps2 = deEnteroaCadena(padres[p2],ps2);
+        string h1 = creahijo(ps1,ps2,h1);
+        string h2 = creahijo(ps2,ps1,h2);
+        hijos[i] = deCadenaaEntero(hijos[i],h1);
+        cout<<hijos[i]<<"  /  ";
+        i++;
+        hijos[i] = deCadenaaEntero(hijos[i],h2);
+        cout<<hijos[i]<<"  /  ";
+    }
+    return hijos;
+}
 
 int main(){
     int n = 8;
-    int* ar = new int[n];
-    generaPoblacion(ar,n);
-    imprime(ar,n);
+    int* padres = new int[n];
+    generaPoblacion(padres,n);
+    imprime(padres,n);
+    int* hijos = new int[n];
+    conbinarycrearhijos(padres,hijos,n);
+    imprime(hijos,n);
     return 0;
 }
