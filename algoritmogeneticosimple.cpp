@@ -64,14 +64,36 @@ int* conbinarycrearhijos(int* padres,int* hijos,int n){
     }
     return hijos;
 }
+int volumen(int l){
+ int largo = 200 - (2 * l);   
+ int ancho = 100 - (2 * l);
+ int vol = (largo * ancho) * l;
+ return vol;
+}
+int* obtenernuevospadres(int* padres,int* hijos, int n){
+    for(int i=0;i<n;i++){
+        if(volumen(padres[i]) < volumen(hijos[i])){
+            padres[i] = hijos[i];
+        }
+    }
+     return padres;
+}
 
 int main(){
     int n = 8;
     int* padres = new int[n];
     generaPoblacion(padres,n);
-    imprime(padres,n);
+    //imprime(padres,n);
     int* hijos = new int[n];
-    conbinarycrearhijos(padres,hijos,n);
-    imprime(hijos,n);
+    //hijos = conbinarycrearhijos(padres,hijos,n);
+    //imprime(hijos,n);
+    //cout<<volumen(21)<<endl;
+    //cout<<volumen(27)<<endl;
+    int iteraciones = 10;
+    for(int i = 0;i < iteraciones;i++){
+        hijos = conbinarycrearhijos(padres,hijos,n);
+        padres = obtenernuevospadres(padres,hijos,n);
+        int* hijos = new int[n];
+    }
     return 0;
 }
